@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cardWrapper {
+  border: 2px solid black;
+  width: 300px;
+  margin: 10px;
+}
+.imgWrapper {
+  width: inherit;
+  height: 300px;
+  position: relative;
+}
+.initials {
+  color: black;
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.img {
+  display: block;
+  width: 100%;
+  height: inherit;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  inset: 0;
+}
+.userCard {
+  text-align: center;
+}
+.cardName {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
