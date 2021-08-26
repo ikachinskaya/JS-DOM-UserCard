@@ -1,70 +1,102 @@
 "use strict";
-const root = document.querySelector("#root");
+const cardsContainer = document.querySelector("#root");
 
-const obj = {
-  id: 1,
-  name: "Boise Greenbelt Trail",
-  description: "rhwdedjsl",
-  profilePicture:
-    "https://cf-images.us-east-1.prod.boltdns.net/v1/static/5615998029001/a6c728cd-a576-4efb-93ed-1c83cfdc73f6/3bb237b3-a7f3-4b67-b899-88f6909df3bb/1280x720/match/image.jpg",
-};
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-}
-const colors = ["red", "coral", "lightblue", "lightgreen", "yellow", "brown"];
-function createColor(colors) {
-  for (let i = 0; i < colors.length; i++) {
-    return colors[getRandomInt(colors.length)];
-  }
-}
+const userCards = data.map((user) => createUserCard(user));
+cardsContainer.append(...userCards);
+
 function createUserCard({ name, description, profilePicture }) {
-  const userCard = document.createElement("li");
-  userCard.classList.add("cardWrapper");
-
-  const article = document.createElement("article");
-  article.classList.add("userCard");
-
-  const imgWrapper = document.createElement("div");
-  imgWrapper.classList.add("imgWrapper");
-
-  const initials = document.createElement("div");
-  initials.classList.add("initials");
-  initials.style.background = createColor(colors);
-  initials.textContent = name
-    .split(" ")
-    .map((word) => word[0])
-    .join("");
-
-  imgWrapper.append(initials);
-
-  const img = document.createElement("img");
-  img.classList.add("img");
-  img.setAttribute("src", profilePicture);
-  img.setAttribute("alt", name);
-  img.addEventListener("error", (e) => {
-    const { target } = e;
-    target.style.display = "none";
+  const img = createElement("img", {
+    classNames: ["img"],
+    attrs: { src: profilePicture, alt: name },
   });
+  img.addEventListener("error", deleteHandler);
 
-  const cardName = document.createElement("h2");
-  cardName.classList.add("cardName");
-  cardName.textContent = name;
+  const cardName = createElement(
+    "h2",
+    { classNames: ["cardName"] },
+    document.createTextNode(name)
+  );
 
-  const cardDescription = document.createElement("p");
-  cardDescription.classList.add("cardDescription");
-  cardDescription.textContent = description;
-  /* cardDescription.append(document.createTextNode(description));*/
+  const cardDescription = createElement(
+    "p",
+    {
+      classNames: ["cardDescription"],
+    },
+    document.createTextNode(description)
+  );
 
-  root.append(userCard);
-  userCard.append(article);
-  article.append(imgWrapper, cardName, cardDescription);
-  imgWrapper.append(img);
+  const initials = createElement(
+    "div",
+    { classNames: ["initials"] },
+    document.createTextNode(
+      name
+        .split(" ")
+        .map((word) => word[0])
+        .join("")
+    )
+  );
+  initials.style.background = stringToColour(name);
+
+  const imgWrapper = createElement(
+    "div",
+    { classNames: ["imgWrapper"] },
+    initials,
+    img
+  );
+
+  const article = createElement(
+    "article",
+    { classNames: ["userCard"] },
+    imgWrapper,
+    cardName,
+    cardDescription
+  );
+
+  const userCard = createElement(
+    "li",
+    { classNames: ["cardWrapper"] },
+    article
+  );
 
   return userCard;
 }
-createUserCard(obj);
 
-const userCards = data.map((user) => createUserCard(user));
-root.append(...userCards);
+function createElement(tagName, options, ...children) {
+  const { classNames = [], attrs = {}, id, onClick = () => {} } = options;
+  const element = document.createElement(tagName);
+  element.classList.add(...classNames);
 
-console.log(createColor(colors));
+  const attributesTuples = Object.entries(attrs);
+
+  for (const [key, value] of attributesTuples) {
+    element.setAttribute(key, value);
+  }
+  if (id) {
+    element.id = id;
+  }
+
+  element.onClick = onClick;
+
+  element.append(...children);
+  return element;
+}
+/* HANDLERS */
+
+function deleteHandler(e) {
+  const { target } = e;
+  target.style.visibility = "hidden";
+}
+
+/* UTILS */
+function stringToColour(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  let colour = "#";
+  for (let i = 0; i < 3; i++) {
+    let value = (hash >> (i * 8)) & 0xff;
+    colour += ("00" + value.toString(16)).substr(-2);
+  }
+  return colour;
+}
