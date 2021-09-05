@@ -7,25 +7,39 @@
   display: flex;
   flex-wrap: wrap;
 }
-
 .cardWrapper {
   border: 2px solid black;
   width: 300px;
   margin: 10px;
+}
+.userCard {
+  text-align: center;
 }
 .imgWrapper {
   width: inherit;
   height: 300px;
   position: relative;
 }
+.cardName {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 20px;
+}
+.cardDescription {
+  padding: 20px 5px;
+}
 .initials {
-  color: black;
+  color: white;
+  font-weight: bold;
+  font-size: 40px;
   position: absolute;
   inset: 0;
-  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.initials:empty:after {
+  content: "Unknown";
 }
 .img {
   display: block;
@@ -35,11 +49,4 @@
   object-position: center;
   position: absolute;
   inset: 0;
-}
-.userCard {
-  text-align: center;
-}
-.cardName {
-  font-size: 1.5rem;
-  font-weight: bold;
 }
