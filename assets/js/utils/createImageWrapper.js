@@ -10,6 +10,7 @@ function createImageWrapper(userObj) {
     attrs: {
       src: profilePicture,
       alt: `${firstName} ${lastName}`,
+      title: `${firstName} ${lastName}`,
       "data-id": id,
     },
   });
@@ -18,7 +19,7 @@ function createImageWrapper(userObj) {
 
   const initials = createElement(
     "div",
-    { classNames: ["initials"] },
+    { classNames: ["initials"], attrs: { title: `${firstName} ${lastName}` } },
     document.createTextNode(
       `${firstName} ${lastName}`
         .trim()
