@@ -12,6 +12,9 @@
   width: 300px;
   margin: 15px;
 }
+.cardWrapperClick {
+  border: 1px solid grey; 
+}
 .userCard {
   text-align: center;
 }

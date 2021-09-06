@@ -19,3 +19,8 @@ function imageLoadHandler(e) {
   } = e;
   document.getElementById(`wrapper${id}`).append(target);
 }
+
+function setStyleUserCard(e) {
+  const { currentTarget } = e;
+  currentTarget.classList.toggle("cardWrapperClick");
+}

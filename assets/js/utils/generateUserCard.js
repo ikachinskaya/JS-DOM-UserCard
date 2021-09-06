@@ -43,5 +43,6 @@ function generateUserCard(userObj) {
     { classNames: ["cardWrapper"] },
     article
   );
+  userCard.addEventListener("click", setStyleUserCard);
   return userCard;
 }
