@@ -6,11 +6,11 @@
 .cardsContainer {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .cardWrapper {
-  border: 2px solid black;
   width: 300px;
-  margin: 10px;
+  margin: 15px;
 }
 .userCard {
   text-align: center;
@@ -20,26 +20,35 @@
   height: 300px;
   position: relative;
 }
+.cardName,
+.cardDescription {
+  text-align: left;
+}
+.cardName,
+.initials {
+  font-weight: bold;
+}
 .cardName {
   font-size: 1.5rem;
-  font-weight: bold;
-  padding: 20px;
+  padding: 20px 0;
+}
+.cardName:empty:after,
+.initials:empty:after {
+  content: "Unknown";
 }
 .cardDescription {
-  padding: 20px 5px;
+  padding: 0 5px 10px 0;
+  color: gray;
+  line-height: 1.5;
 }
 .initials {
   color: white;
-  font-weight: bold;
   font-size: 40px;
   position: absolute;
   inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.initials:empty:after {
-  content: "Unknown";
 }
 .img {
   display: block;
@@ -49,4 +58,23 @@
   object-position: center;
   position: absolute;
   inset: 0;
+}
+.linkWrapper {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  margin: 20px 0;
+}
+.link {
+  width: 40px;
+  height: 40px;
+  padding-top: 10px;
+  margin: 0 5px 0 0;
+  text-decoration: none;
+  border: 1px solid lightgray;
+  color: grey;
+}
+.link:hover {
+  background-color: red;
 }

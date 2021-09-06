@@ -4,63 +4,38 @@
  * @returns {HTMLLIElement} верстка карточки
  */
 function generateUserCard(userObj) {
-  const { id, firstName, lastName, description, profilePicture } = userObj;
+  const { firstName, lastName, contacts } = userObj;
 
-  const img = createElement("img", {
-    classNames: ["img"],
-    attrs: {
-      src: profilePicture,
-      alt: `${firstName} ${lastName}`,
-      "data-id": id,
-    },
-  });
-  img.addEventListener("error", deleteHandler);
-  img.addEventListener("load", imageLoadHandler);
+  const linkWrapper = createElement(
+    "div",
+    { classNames: ["linkWrapper"] },
+    ...generateLinks(contacts)
+  );
 
   const cardName = createElement(
     "h2",
     { classNames: ["cardName"] },
-    document.createTextNode(`${firstName} ${lastName}`)
+    document.createTextNode(`${firstName} ${lastName}`.trim())
   );
 
   const cardDescription = createElement(
     "p",
     { classNames: ["cardDescription"] },
     document.createTextNode(
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus, quis."
+      `Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+      Accusantium quod impedit quae sit tempora nihil deleniti ratione sed praesentium id?`
     )
   );
 
-  const initials = createElement(
-    "div",
-    { classNames: ["initials"] },
-    document.createTextNode(
-      `${firstName} ${lastName}`
-        .trim()
-        .split(" ")
-        .map((word) => word[0])
-        .join(" ")
-
-      // name.trim()
-      // .split(" ")
-      // .map((word) => word[0])
-      // .join(" ") || "Unknown"
-    )
-  );
-  initials.style.background = stringToColor(firstName.trim());
-
-  const imgWrapper = createElement(
-    "div",
-    { classNames: ["imgWrapper"], attrs: { id: `wrapper${id}` } },
-    initials
-  );
+  const imgWrapper = createImageWrapper(userObj);
 
   const article = createElement(
     "article",
     { classNames: ["userCard"] },
     imgWrapper,
     cardName,
-    cardDescription
+    cardDescription,
+    linkWrapper
   );
 
   const userCard = createElement(
@@ -68,6 +43,5 @@ function generateUserCard(userObj) {
     { classNames: ["cardWrapper"] },
     article
   );
-
   return userCard;
 }

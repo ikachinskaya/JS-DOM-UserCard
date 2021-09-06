@@ -9,7 +9,7 @@
  * @returns {HTMLElement} созданный элемент
  */
 function createElement(tagName, options, ...children) {
-  const { classNames = [], attrs = {}, id, onClick = () => {} } = options;
+  const { classNames = [], attrs = {}, onClick = () => {} } = options;
   const element = document.createElement(tagName);
   element.classList.add(...classNames);
 
@@ -19,12 +19,6 @@ function createElement(tagName, options, ...children) {
     const [key, value] = attribute;
     element.setAttribute(key, value);
   }
-
-  //key == attribute[0];
-  //  value == attribute[1];
-  // for (const [key, value] of attributesTuples) {
-  //   element.setAttribute(key, value);
-  // }
   element.onClick = onClick;
 
   element.append(...children);
