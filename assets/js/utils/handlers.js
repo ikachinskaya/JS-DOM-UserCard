@@ -21,7 +21,8 @@ function imageLoadHandler(e) {
 }
 /**
  * Слушатель для смены стилей картинки
- * @param {*} e 
+ * @param {Event} e 
+ * @returns
  */
 function setStyleUserCard(e) {
   const { currentTarget } = e;
