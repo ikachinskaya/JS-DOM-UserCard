@@ -13,9 +13,11 @@ function createImageWrapper(userObj) {
       title: `${firstName} ${lastName}`,
       "data-id": id,
     },
+    listener: {
+      error: deleteHandler,
+      load: imageLoadHandler,
+    },
   });
-  img.addEventListener("error", deleteHandler);
-  img.addEventListener("load", imageLoadHandler);
 
   const initials = createElement(
     "div",
@@ -32,7 +34,8 @@ function createImageWrapper(userObj) {
   const imgWrapper = createElement(
     "div",
     { classNames: ["imgWrapper"], attrs: { id: `wrapper${id}` } },
-    initials
+    initials,
+    img
   );
   return imgWrapper;
 }
