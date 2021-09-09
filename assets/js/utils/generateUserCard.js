@@ -40,9 +40,9 @@ function generateUserCard(userObj) {
 
   const userCard = createElement(
     "li",
-    { classNames: ["cardWrapper"] },
+    { classNames: ["cardWrapper"], listener: { click: setStyleUserCard } },
     article
   );
-  userCard.addEventListener("click", setStyleUserCard);
+
   return userCard;
 }
