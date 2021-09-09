@@ -19,7 +19,10 @@ function imageLoadHandler(e) {
   } = e;
   document.getElementById(`wrapper${id}`).append(target);
 }
-
+/**
+ * Слушатель для смены стилей картинки
+ * @param {*} e 
+ */
 function setStyleUserCard(e) {
   const { currentTarget } = e;
   currentTarget.classList.toggle("cardWrapperClick");
