@@ -13,7 +13,7 @@
   margin: 15px;
 }
 .cardWrapperClick {
-  border: 1px solid grey; 
+  border: 1px solid grey;
   padding: 10px;
 }
 .userCard {
@@ -62,6 +62,9 @@
   object-position: center;
   position: absolute;
   inset: 0;
+}
+.img:hover {
+  filter: grayscale(1);
 }
 .linkWrapper {
   display: flex;
